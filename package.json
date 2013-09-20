@@ -1,6 +1,6 @@
 {
   "name": "torcache",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A node.js wrapper for torcache.net",
   "main": "index.js",
   "scripts": {
@@ -23,7 +23,8 @@
     "url": "https://github.com/pmorissette/torcache.js/issues"
   },
   "dependencies": {
-    "request": "~2.27.0"
+    "request": "~2.27.0",
+    "compress-buffer": "~1.2.0"
   },
   "devDependencies": {}
 }

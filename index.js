@@ -1,5 +1,5 @@
 var request = require('request'),
-  zlib = require('zlib'),
+  uncompress = require('compress-buffer').uncompress,
   fs = require('fs');
 
 var headers = {
@@ -10,7 +10,8 @@ var headers = {
 }
 
 var options = {
-    headers: headers
+    headers: headers,
+    encoding: null
 }
 
 module.exports = function(hash, filename, callback) {
@@ -19,34 +20,32 @@ module.exports = function(hash, filename, callback) {
     options.url = "http://torcache.net/torrent/{0}.torrent".replace('{0}', hash);
 
     // create request and handle response
-    var req = request(options)
-
-    req.on('response', function (res) {
-        if (res.statusCode !== 200) {
-            return callback(new Error('Status not 200'));
-        }
-
-        // create writeStream
-        var outStream = null;
-        try {
-            outStream = fs.createWriteStream(filename);
-        } catch(err) {
+    request(options, function(err, response, body) {
+        if (err) {
             return callback(err);
         }
 
-        var encoding = res.headers['content-encoding'];
-        if (encoding == 'gzip') {
-            res.pipe(zlib.createGunzip()).pipe(outStream)
-        } else if (encoding == 'deflate') {
-            res.pipe(zlib.createInflate()).pipe(outStream)
-        } else {
-            res.pipe(outStream)
+        if (response.statusCode != 200) {
+            return callback(new Error('Status code not 200. Received code: ' + response.statusCode));
         }
 
-        return callback(null);
-    });
+        // Handle gzip
+        var encoding = response.headers['content-encoding']
+        if(encoding && encoding.indexOf('gzip')>=0) {
+            try {
+                body = uncompress(body);
+            } catch (compError) {
+                return callback(compError);
+            }
+        }
 
-    req.on('error', function(err) {
-        return callback(err);
+        // save to file
+        fs.writeFile(filename, body, function(err) {
+            if (err) {
+                return callback(err);
+            } else {
+                return callback(null);
+            }
+        });
     });
 }
