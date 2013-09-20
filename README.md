@@ -10,7 +10,7 @@ the info hash, then you can do the following:
 ````javascript
 var torcache = require('torcache');
 
-torget.get('e50331a0a8499d95ef8ebd546113cd021275c877', 'ubuntu-server-13.04-64.torrent' function(err) {
+torcache('e50331a0a8499d95ef8ebd546113cd021275c877', 'ubuntu-server-13.04-64.torrent', function(err) {
   if (err) {
     console.log(err);
   } else {
