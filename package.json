@@ -1,0 +1,29 @@
+{
+  "name": "torcache",
+  "version": "0.0.1",
+  "description": "A node.js wrapper for torcache.net",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pmorissette/torcache.js.git"
+  },
+  "keywords": [
+    "torrent",
+    "info-hash",
+    "downloader",
+    "torcache",
+    "torcache.net"
+  ],
+  "author": "Philippe Morissette",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pmorissette/torcache.js/issues"
+  },
+  "dependencies": {
+    "request": "~2.27.0"
+  },
+  "devDependencies": {}
+}
