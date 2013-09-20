@@ -1,6 +1,6 @@
 {
   "name": "torcache",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A node.js wrapper for torcache.net",
   "main": "index.js",
   "scripts": {
