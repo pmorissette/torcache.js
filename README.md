@@ -20,8 +20,8 @@ torcache('e50331a0a8499d95ef8ebd546113cd021275c877', 'ubuntu-server-13.04-64.tor
 ````
 
 Now most people don't really have the info hash handy, so in that case I recommend using another library
-for the torrent finding part of the job. The http://github.com/ProjectMoon/flux library comes to mind as 
-its search function returns a list of torrent objects with the infoHash property.
+for the torrent finding part of the job. The http://github.com/pmorissette/torget library builds on top of
+torcache and provides a better interface for downloading torrent files.
 
 ###torcache(hash, path, callback)
 * `hash` a torrent info hash string
